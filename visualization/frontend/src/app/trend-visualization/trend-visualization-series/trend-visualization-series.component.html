@@ -1,0 +1,24 @@
+<div class='chart-container background-white'>
+    <ngx-charts-line-chart [results]='series'
+                           [view]='[tileWidth$|async,150]'
+                           [customColors]="customColors"
+                           [xAxis]="false"
+                           [yAxis]="true"
+                           [showXAxisLabel]="false"
+                           [showYAxisLabel]="true"
+                           [showGridLines]="true"
+                           [legend]="false"
+                           legendPosition="below"
+                           [showRefLines]="true"
+                           [rangeFillOpacity]='0.1'
+                           [referenceLines]='referenceLines'
+                           [yScaleMin]='range.min'
+                           [yScaleMax]='range.max'>
+                           <ng-template #tooltipTemplate let-model="model">
+                            <div><b>{{model.series}}</b></div>
+                            <div><b>{{model.value}}</b>{{model|minMax}}</div>
+                            <div>hash: {{model.hash|slice:0:6}}...</div>
+                            <div>date: {{model.date|date:longDate}}</div>
+                        </ng-template>
+    </ngx-charts-line-chart>
+</div>

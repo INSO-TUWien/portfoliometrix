@@ -1,0 +1,52 @@
+<div class="tile is-ancestor">
+    <div class="tile is-parent is-3"
+         *ngIf='metricSelection$ | async'>
+        <div class="tile is-child box button-parent control-tile"
+             [ngClass]="{'collapsed' : !(isExpanded$|async)}">
+            <div>
+                <div class='is-size-5 diagram-title expander'>
+                    <a (click)='toggleExpanded()'>{{(isExpanded$|async) ? '-' : '+'}}</a>
+                </div>
+                <div class='is-size-6 diagram-title has-text-weight-bold'> Artifacts</div>
+            </div>
+            <app-metric-selection *ngIf='isExpanded$|async'
+                                  [metricSelections]='(metricSelection$ | async).selection'
+                                  (stateChanged)='onMetricSelectionChanged($event)'></app-metric-selection>
+            <div class='button-container'
+                 *ngIf='isExpanded$|async'>
+                <app-entity-filter [filter]='entityFilter$|async'
+                                   (changeFilter)='onFilterChanged($event)'></app-entity-filter>
+            </div>
+        </div>
+    </div>
+    <div class="tile is-parent has-text-centered"
+         *ngFor="let project of selectedProjects$|async">
+        <article class="tile box is-child artifact-tile"
+                 *ngIf="(artifactListsForCurrentSnapshot$|async)">
+            <ng-container *ngIf='isExpanded$|async'>
+                <ng-container *ngIf='!(isLoading$|async)'>
+                    <div class='table-container artifact-list-height'
+                         *ngIf='(isMetricValid$|async)'>
+                        <table class="table is-striped is-fullwidth artifact-table"
+                               *ngIf='(getArtifactsPerProject(project.id)|async) as artifacts'
+                               [style.width]='(this.tileWidth$|async) - 8 + "px"'><!-- delta px are for the scrollbar -->
+                            <tbody>
+                                <tr *ngFor='let artifact of artifacts'>
+                                    <td class='clipped'><a [href]='artifact.url'
+                                           target='_blank'>{{artifact.name}}</a></td>
+                                    <td width="10%">{{artifact.value}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </ng-container>
+            </ng-container>
+            <ng-container *ngIf='isExpanded$|async'>
+                <div *ngIf='!(isMetricValid$|async)'
+                     class='status-message'>No valid metrics available</div>
+                <div *ngIf='isLoading$|async'
+                     class='status-message'>Loading...</div>
+            </ng-container>
+        </article>
+    </div>
+</div>

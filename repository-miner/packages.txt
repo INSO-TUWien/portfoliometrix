@@ -1,0 +1,6 @@
+pyArango
+GitPython
+PyDriller
+PyGithub
+Jinja2
+numpy

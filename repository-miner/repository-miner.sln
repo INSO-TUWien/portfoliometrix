@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.329
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "repository-miner", "repository-miner.pyproj", "{08A121FA-5AAD-452A-B8C7-DF9CA5B80822}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{08A121FA-5AAD-452A-B8C7-DF9CA5B80822}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08A121FA-5AAD-452A-B8C7-DF9CA5B80822}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D2B0267D-931B-4368-A81B-5FACE8DC8EE0}
+	EndGlobalSection
+EndGlobal

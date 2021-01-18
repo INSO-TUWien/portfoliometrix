@@ -1,0 +1,14 @@
+<!--
+<div class='portfolio-selection-root'>
+  <div class="select portfolio-selection">
+    <select (change)="onPortfolioSelectionChange($event.target.value)">
+      <option [value]='null'>Select a portfolio:</option>
+      <option *ngFor='let portfolio of portfolios$ | async'
+              [value]='portfolio.id'
+              [selected]='portfolio.id === (activePortfolio$|async).id'>{{portfolio.name}}</option>
+    </select>
+  </div>
+  <label class="label portfolio-selection-label is-vcentered">Select your portfolio</label>
+</div>
+-->
+<div *ngIf='(activePortfolio$|async) as portfolio'>{{portfolio.name}}</div>

@@ -1,0 +1,43 @@
+// collect all metric values and group them by snapshot, metric and project
+
+FOR result3 IN (
+    FOR result2 IN (
+        FOR result IN (
+            FOR p IN Portfolio
+            // TODO remove filters later
+                FOR r IN 1..1 OUTBOUND p RepositoryInPortfolio
+                    FOR s IN 1..1 INBOUND r SnapshotOfRepository
+                        FOR entity, value IN 1..1 INBOUND s MetricValue
+                        RETURN {
+                            snapshot: s.index,
+                            project: r._key,
+                            metric: value.metric,
+                            value: value.value,
+                            kind: entity.kind
+                        }
+        )
+        COLLECT snapshot = result.snapshot, project = result.project, metric = result.metric, kind = result.kind INTO by_snapshot_project_metric
+        RETURN {
+            snapshot: snapshot,
+            metric: metric,
+            project:  {
+                id: project,
+                kind: kind,
+                values: by_snapshot_project_metric[*].result.value
+            }
+        }
+    )
+    COLLECT snapshot = result2.snapshot, metric = result2.metric INTO by_snapshot_metric
+    RETURN {
+        snapshot: snapshot,
+        metric: {
+            id: metric,
+            projects: by_snapshot_metric[*].result2.project
+        }
+    }
+)
+COLLECT snapshot = result3.snapshot  INTO by_snapshot
+RETURN {
+     _key: TO_STRING(snapshot),
+     metrics: by_snapshot[*].result3.metric
+}

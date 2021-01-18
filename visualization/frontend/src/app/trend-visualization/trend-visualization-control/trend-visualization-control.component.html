@@ -1,0 +1,55 @@
+<div class="field is-horizontal small-height">
+    <div class="field-body">
+        <div class="field small-height">
+            <div class="field has-addons is-marginless small-height">
+                <button class='button is-small is-info is-outlined'
+                        (click)='controlChanged.emit(controls.toggleValue())'
+                        [class.is-light]="controls.isAbsolute"
+                        [matTooltip]='"show absolute values"'>
+                    Abs</button>
+                <button class='button is-small is-info is-outlined'
+                        (click)='controlChanged.emit(controls.toggleValue())'
+                        [class.is-light]='controls.isRelative'
+                        [matTooltip]='"show changes since start"'>+/-</button>
+            </div>
+        </div>
+        <div class="field small-height">
+            <div class="field has-addons is-marginless small-height">
+                <button class='button is-small is-info is-outlined'
+                        (click)='controlChanged.emit(controls.toggleSum())'
+                        [class.is-light]='controls.showSum'
+                        [matTooltip]='"show accumulated values (only for line of code)"'>Sum</button>
+                <button class='button is-small is-info is-outlined'
+                        (click)='controlChanged.emit(controls.toggleAverage())'
+                        [class.is-light]='controls.isAverage'
+                        [matTooltip]='"show metric average"'>Avg</button>                     
+                <button class='button is-small is-info is-outlined'
+                        (click)='controlChanged.emit(controls.toggleMedian())'
+                        [class.is-light]='controls.isMedian'
+                        [matTooltip]='"show metric median"'>Med</button>
+            </div>
+
+        </div>
+        <div class="field small-height">
+            <div class="field has-addons is-marginless small-height">
+                <button class='button is-small is-info is-outlined'
+                        (click)='controlChanged.emit(controls.toggleMinMax())'
+                        [class.is-light]='controls.showMinMax'
+                        [matTooltip]='"show/hide min max values"'>Min/Max</button>
+                <button class='button is-small is-info is-outlined'
+                        (click)='controlChanged.emit(controls.toggleUniformScale())'
+                        [class.is-light]='controls.uniformScale'
+                        [matTooltip]='"adjust uniform scale over all projects"'>Scale</button>
+                <button *ngIf='showThresholdButtons'
+                        class='button is-small is-info is-outlined'
+                        (click)='controlChanged.emit(controls.toggleThresholds())'
+                        [class.is-light]='controls.showThresholds'
+                        [matTooltip]='"show/hide thresholds for metrics"'>Thresholds</button>
+                <!-- not supported yet 
+                <button class='button is-small is-info is-outlined'
+                        [class.is-light]='controls.normalize'>Normalize</button>
+                -->
+            </div>
+        </div>
+    </div>
+</div>

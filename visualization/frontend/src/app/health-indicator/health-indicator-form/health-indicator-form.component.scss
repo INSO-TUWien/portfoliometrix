@@ -1,0 +1,48 @@
+.hide-back {
+    color: white;
+    opacity: .5;
+}
+.dialog {
+    height: 750px;
+}
+
+
+.button-margin {
+    margin-left: 10px;
+}
+
+.right-align {
+    justify-content: flex-end;
+}
+
+.stretched {
+  justify-content: space-between;
+}
+
+.Critical {
+    color: white;
+    background-color: #CC0000;
+  }
+  
+  .Worsening {
+    color: white;
+    background-color: #FF9933;
+  }
+  
+  .Improving {
+    color: black;
+    background-color: #f0e130;
+  }
+  
+  .Good {
+    color: white;
+    background-color: #66cc00;
+  }
+
+  .NotCalculated {
+    color: white;
+    background-color: lightgray;
+  }
+  
+
+

@@ -1,0 +1,51 @@
+<nav class="navbar is-white">
+    <div class="container is-fluid">
+        <div class="navbar-brand">
+            <div class="navbar-item brand-text">
+                <app-portfolio-overview></app-portfolio-overview>
+                <!--
+                <app-portfolio-selection></app-portfolio-selection>
+                -->
+            </div>            
+            <div class="navbar-burger burger"
+                 data-target="navMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <div id="navMenu"
+             class="navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item"
+                   routerLink='/dashboard'>
+                    Dashboard
+                </a>
+                <a class="navbar-item"
+                   routerLink='/snapshot'>
+                    Snapshots
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class='container is-fluid'>
+    <router-outlet></router-outlet>
+</div>
+
+
+<!--
+<div class='container is-fluid'>
+    <app-portfolio-overview [selectedPortfolio]='selectedPortfolio$ | async'></app-portfolio-overview>
+
+    <div class="tabs is-centered menu">
+        <ul>
+            <li [class.is-active]='dashboardIsActive'><a routerLink='/dashboard'
+                   (click)='dashboardIsActive=true'>Dashboard</a></li>
+            <li [class.is-active]='!dashboardIsActive'><a routerLink='/snapshot'
+                   (click)='dashboardIsActive=false'>Snapshots</a></li>
+        </ul>
+    </div>
+    <router-outlet></router-outlet>
+</div>
+-->

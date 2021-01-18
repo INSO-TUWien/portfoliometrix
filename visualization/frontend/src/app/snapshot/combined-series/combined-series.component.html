@@ -1,0 +1,13 @@
+<div class="tile is-ancestor">
+    <div class="tile is-parent is-3" *ngIf='metricSelection$ | async'>
+        <div class="tile is-child box">
+            <app-metric-selection [metricSelections]='(metricSelection$ | async).selection'
+            (stateChanged)='onMetricSelectionChanged($event)'></app-metric-selection>
+        </div>
+    </div>
+    <div class="tile is-parent is-10">
+        <div class="tile is-child box combined-series">
+            <app-combined-series-trend></app-combined-series-trend>
+        </div>
+    </div>
+</div>

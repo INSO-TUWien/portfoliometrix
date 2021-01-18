@@ -1,0 +1,9 @@
+<div *ngFor='let project of projectSelections'>
+  <label class="checkbox is-size-7"
+         [style.font-weight]="project.isSelected ? 'bold' : 'normal'">
+    <input type="checkbox" #checkbox
+           [checked]='project.isSelected'
+           (change)="stateChanged.emit({id: project.id, isSelected: !project.isSelected})">
+    {{project.name}}
+  </label>
+</div>

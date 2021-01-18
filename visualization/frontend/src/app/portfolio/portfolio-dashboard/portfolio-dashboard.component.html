@@ -1,0 +1,10 @@
+<ng-container *ngIf='selectedPortfolio$|async'>
+    <app-project-list
+        [currentSortOrder$]='currentSortOrder$'
+        [projects$]='projects$'
+        (changeSortOrder)='changeSortOrder($event)'></app-project-list>
+    <app-trend-visualization-list 
+        [projects$]='projects$'
+    ></app-trend-visualization-list>
+</ng-container>
+

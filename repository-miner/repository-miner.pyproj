@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{08a121fa-5aad-452a-b8c7-df9ca5b80822}</ProjectGuid>
+    <ProjectHome />
+    <StartupFile>main.py</StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <ProjectTypeGuids>{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <InterpreterId />
+    <IsWindowsApplication>False</IsWindowsApplication>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <PropertyGroup>
+    <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="analysis\metric_analyzer.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="configuration\db_config.py" />
+    <Compile Include="configuration\metric_config.py" />
+    <Compile Include="configuration\repository_config.py" />
+    <Compile Include="configuration\__init__.py" />
+    <Compile Include="downloading\progress.py" />
+    <Compile Include="downloading\repository.py" />
+    <Compile Include="downloading\repository_downloader.py" />
+    <Compile Include="downloading\__init__.py" />
+    <Compile Include="repository-miner.py" />
+    <Compile Include="storage.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="storage\graph.py" />
+    <Compile Include="storage\storage.py" />
+    <Compile Include="storage\__init__.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="configuration\" />
+    <Folder Include="downloading\" />
+    <Folder Include="downloading\__pycache__\" />
+    <Folder Include="analysis\" />
+    <Folder Include="storage\" />
+    <Folder Include="storage\__pycache__\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="downloading\__pycache__\progress.cpython-36.pyc" />
+    <Content Include="downloading\__pycache__\progress.cpython-37.pyc" />
+    <Content Include="downloading\__pycache__\repository.cpython-36.pyc" />
+    <Content Include="downloading\__pycache__\repository.cpython-37.pyc" />
+    <Content Include="downloading\__pycache__\repository_downloader.cpython-36.pyc" />
+    <Content Include="downloading\__pycache__\repository_downloader.cpython-37.pyc" />
+    <Content Include="downloading\__pycache__\__init__.cpython-36.pyc" />
+    <Content Include="downloading\__pycache__\__init__.cpython-37.pyc" />
+    <Content Include="storage\__pycache__\graph.cpython-36.pyc" />
+    <Content Include="storage\__pycache__\graph.cpython-37.pyc" />
+    <Content Include="storage\__pycache__\storage.cpython-36.pyc" />
+    <Content Include="storage\__pycache__\storage.cpython-37.pyc" />
+    <Content Include="storage\__pycache__\__init__.cpython-36.pyc" />
+    <Content Include="storage\__pycache__\__init__.cpython-37.pyc" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
+</Project>

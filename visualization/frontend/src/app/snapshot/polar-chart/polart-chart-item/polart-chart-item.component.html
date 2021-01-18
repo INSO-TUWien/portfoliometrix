@@ -1,0 +1,21 @@
+<div class='chart-container'>
+    <ngx-charts-polar-chart
+    [view]='[chartWidth, 270]'
+    [results]="series$|async"
+    [customColors]='customColors$|async'
+    [animations]='false'
+    [xAxis]="true" 
+    [yAxis]="true"
+    [showXAxisLabel]="false" 
+    [showYAxisLabel]="false" 
+    [showGridLines]="true"
+    [legend]="false"
+    [legendPosition]="'below'"
+    [labelTrim]='true'
+    [labelTrimSize]='12'
+    [tooltipDisabled]='false'
+    [curve]='curve'
+    [autoScale]='true'
+    [yAxisMinScale]='0'>
+    </ngx-charts-polar-chart>
+</div>

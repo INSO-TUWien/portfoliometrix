@@ -1,0 +1,56 @@
+<div class='columns is-centered'>
+    <app-trend-visualization-control [controls]='visualizationControls$|async'
+                                     (controlChanged)='onControlsChanged($event)'>
+    </app-trend-visualization-control>
+</div>
+<div #chartcontainer
+    class='chart background-white'>
+    <ngx-charts-line-chart [results]='series$ | async'
+                           #chart
+                           [customColors]='colorPalette$| async'
+                           [xAxis]="false"
+                           [yAxis]="true"
+                           [showXAxisLabel]="false"
+                           [showYAxisLabel]="true"
+                           [showGridLines]="true"
+                           [legend]="true"
+                           [showRefLines]="(visualizationControls$|async).showThresholds"
+                           [referenceLines]='referenceLines$|async'
+                           [rangeFillOpacity]='0.1'
+                           [yScaleMin]='(range$|async).min'
+                           [yScaleMax]='(range$|async).max'>
+                           <ng-template #tooltipTemplate let-model="model">
+                            <div><b>{{model.series}}</b></div>
+                            <div><b>{{model.value}}</b>{{model|minMax}}</div>
+                            <div>hash: {{model.hash|slice:0:6}}...</div>
+                            <div>date: {{model.date|date:longDate}}</div>
+                            </ng-template>
+    </ngx-charts-line-chart>
+    <!-- the time line that is used to select a single commit (or the play function)-->
+   <div *ngIf='showSlider'>
+        <svg class='timeline-container'
+            [attr.width]='chart.width'
+            *ngIf='chart'>
+            <line class='timeline'
+                [attr.x1]='currentTimeLinePosition$ | async'
+                [attr.x2]='currentTimeLinePosition$ | async'
+                  y1='0'
+                  [attr.y2]='250'>
+            </line>
+        </svg>
+    </div>
+    <div *ngIf='showSlider'>
+        <!-- there is a margin on the left side and also a padding of 5px left and right
+          therefore we must subtract something from the overall width of the chart
+      -->
+        <input #slider
+               class='timeline-slider'
+               type="range"
+               min="0"
+               max="49"
+               [value]='selectedSnapshotIndex$ | async'
+               (input)='sliderChanged(slider.value)'
+               [style.width]='sliderWidth + "px"'
+               [style.margin-left]='sliderOffset + "px"'>
+    </div>
+</div>

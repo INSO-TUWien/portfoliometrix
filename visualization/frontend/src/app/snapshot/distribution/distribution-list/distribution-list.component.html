@@ -1,0 +1,35 @@
+<div class="tile is-ancestor">
+    <div class="tile is-parent is-3"
+         *ngIf='metricSelection$ | async'>
+        <div class="tile is-child box button-parent control-tile"
+        [ngClass]="{'collapsed' : !(isExpanded$|async)}">
+            <div>
+                <div class='is-size-5 diagram-title expander'>
+                    <a (click)='toggleExpanded()'>{{(isExpanded$|async) ? '-' : '+'}}</a>
+                </div>
+                <div class='is-size-6 diagram-title has-text-weight-bold'> Distribution</div>
+            </div>
+            <app-metric-selection *ngIf='isExpanded$|async'
+                                  [metricSelections]='(metricSelection$ | async).selection'
+                                  (stateChanged)='onMetricSelectionChanged($event)'></app-metric-selection>
+            <div class='button-container' *ngIf='isExpanded$|async'>
+                <app-entity-filter [filter]='entityFilter$|async'
+                                   (changeFilter)='onFilterChanged($event)'></app-entity-filter>
+            </div>
+        </div>
+    </div>
+    <div class="tile is-parent has-text-centered"
+         *ngFor="let project of selectedProjects$|async">
+        <article class="tile box is-child distribution-tile"
+                 *ngIf="(distributionForCurrentSnapshot$|async) as distributions">
+            <ng-container *ngIf='isExpanded$|async'>
+                <app-distribution-list-item *ngIf='isMetricValid$|async'
+                                            [chartWidth]='tileWidth$|async'
+                                            [series$]='getDistributionForProject(project.id)'
+                                            [metric]='distributions.metric'>
+                </app-distribution-list-item>
+            </ng-container>
+            <div *ngIf='!(isMetricValid$|async)' class='status-message'>No valid metrics available</div>
+        </article>
+    </div>
+</div>

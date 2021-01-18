@@ -1,0 +1,6 @@
+<ng-container *ngIf='(projects$|async) as projects'>
+    <app-trend-visualization-row *ngFor='let row of rows$ | async' [row]='row'
+        [projects]='projects'>
+    </app-trend-visualization-row>
+</ng-container>
+

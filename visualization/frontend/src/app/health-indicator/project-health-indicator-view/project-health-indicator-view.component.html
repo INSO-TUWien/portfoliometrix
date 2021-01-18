@@ -1,0 +1,52 @@
+<div *ngIf='(indicator$|async) as indicator'>
+    <a (click)='openIndicatorDialog(projectId)'>
+        <app-health-indicator-icon [healthState$]='healthState$'
+                                   [indicatorName]='indicator.name'>
+        </app-health-indicator-icon>
+    </a>
+</div>
+
+<!-- dialog where user can enter indicator data -->
+<app-health-indicator-form #healthIndicatorForm
+                           [healthStateQuery]='healthStateQuery'
+                           (indicatorUpdated)='updateHealthIndicator($event)'
+                           (indicatorDeleted)='deleteHealthIndicator($event)'>
+</app-health-indicator-form>
+
+<!-- message box where user can choose which indicator to load -->
+<div class="modal"
+     [class.is-active]='chooseIndicatorMessageBoxIsVisible'>
+    <div class="modal-background hide-back"></div>
+    <div class="modal-card message-box">
+        <header class="modal-card-head">
+            <div class='modal-card-title'>
+                <div class='left'>Choose health indicator</div>
+            </div>
+            <button class="delete"
+                    (click)='cancelMessageBox()'
+                    aria-label="close"></button>
+        </header>
+        <section class="modal-card-body has-text-left">
+            <div>
+                This project does not have an individual health indicator.
+            </div>
+            <div>
+                Please choose your option:
+            </div>
+            <div class="list is-hoverable list-margin">
+                <a class="list-item"
+                   (click)='createProjectIndicator()'>
+                    Create a new indicator for this project
+                </a>
+                <a class="list-item"
+                   (click)='usePortfolioIndicator()'>
+                    Use the global indicator for this project
+                </a>
+                <a class="list-item"
+                   (click)='cancelMessageBox()'>
+                    Cancel
+                </a>
+            </div>
+        </section>        
+    </div>
+</div>

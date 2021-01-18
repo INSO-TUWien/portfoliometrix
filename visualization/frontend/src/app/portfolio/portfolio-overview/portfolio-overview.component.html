@@ -1,0 +1,11 @@
+<div class='columns'>
+    <div class='column'>
+        <app-portfolio-selection></app-portfolio-selection>
+    </div>
+    <div class='column column is-vcentered has-text-left'>
+        <app-health-indicator-view *ngIf='activePortfolio$|async'
+                                   [healthIndicator$]='indicator$'
+                                   (updateHealthIndicator)='onIndicatorUpdated($event)'>
+        </app-health-indicator-view>
+    </div>
+</div>

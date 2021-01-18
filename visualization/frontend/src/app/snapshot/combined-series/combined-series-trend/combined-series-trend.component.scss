@@ -1,0 +1,58 @@
+// .chart-container {
+//     width: 100%;
+//     height: 250px;
+//     margin-left: -50px;
+// }
+//@import 'bulma';
+
+$chartHeight: 150px;
+$chartWidth: auto;
+
+.chart {
+    position:relative;
+    display: grid;
+    height: $chartHeight;
+    width: $chartWidth;    
+}
+
+.tooltip-snapshot-id {
+    /* 
+    as the commit ids can be very long,
+    they are limited to the first five characters */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 10ch;
+}
+
+.timeline-container {
+    /* 
+    the svg is embedded in a container with 'relative'
+    position, therefore the absolute position of the
+    svg container uses its position within the parent as origin 
+    */
+    position:absolute;
+    top:0px;
+    left: 0px;
+    height: $chartHeight;    
+    pointer-events: none;
+}
+
+.timeline {
+    stroke: lightgrey;
+    stroke-width:2;
+    top:0px;
+    left:0px;
+    position:relative;
+}
+
+.timeline-slider {
+    // we need the margin to draw after the chart's legend
+    margin-top:0px;
+    position:relative;
+    appearance: none;
+    height: 5px;
+    outline:none;
+    background: lightgrey;
+    //width: $chartWidth - 68 - 190;
+    //margin-left: 68px;
+}

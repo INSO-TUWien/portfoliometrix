@@ -1,0 +1,20 @@
+.clipped {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .artifact-table {
+      table-layout: fixed;
+  }
+
+  .artifact-list-height {
+      height: 275px;
+      overflow-y: auto;
+  }
+
+  .artifact-tile {
+      padding: 0px;
+  }
+
+

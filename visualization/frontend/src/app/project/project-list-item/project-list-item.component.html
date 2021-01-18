@@ -1,0 +1,27 @@
+<div>
+    <div class='columns'>
+        <div class='column has-text-right reduce-horizontal-padding reduce-vertical-padding'>
+            <a [href]='project.homePage' target='_blank'>
+                <div class="title is-lowercase project-title is-size-4"
+                     id='left'>
+                    {{project.name}}
+                </div>
+            </a>
+        </div>
+        <div class='column is-vcentered has-text-left reduce-horizontal-padding reduce-vertical-padding'>
+            <app-project-health-indicator-view [projectId]='project.id'
+                                               [indicator$]='indicatorQuery.selectProjectIndicator(project.id)'
+                                               [healthState$]='healthStateQuery.getWorstHealthStateForEntity(project.id)'
+                                               class='has-text-right'
+                                               id='right'>
+            </app-project-health-indicator-view>
+        </div>
+    </div>
+    <div class='columns'>
+        <div class='column reduce-vertical-padding'>
+            <div class='is-size-6 project-description text-hcenter'>
+                {{project.description}}
+            </div>
+        </div>
+    </div>
+</div>

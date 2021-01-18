@@ -1,0 +1,21 @@
+<div class='chart-container'>
+    <ngx-charts-bar-vertical 
+    [view]='[chartWidth, 270]'
+    [customColors]='customColor.bind(this)'
+    [results]="series$|async"
+    [animations]='false'
+    [xAxis]='true'
+    [showXAxisLabel]='true'
+    [yAxis]='false'
+    [showYAxisLabel]='false'
+    [barPadding]='2'
+    [rotateXAxisTicks]='true'
+    [noBarWhenZero]='true'
+    [showDataLabel]='true'
+    [roundEdges]='false'>
+    <ng-template #tooltipTemplate let-model="model">
+        <div>Count: <b>{{model.value}}</b></div>
+        <div>Range: {{model.name}}</div>
+    </ng-template>
+    </ngx-charts-bar-vertical>
+</div>

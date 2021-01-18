@@ -1,0 +1,14 @@
+<div *ngIf="healthIndicator$ | async">
+    <div *ngIf='(healthIndicator$ | async) as indicator'>
+        <a (click)='healthIndicatorForm.initializeDialog(indicator)'>
+            <app-health-indicator-icon [healthState$]='healthState$'
+                                       [indicatorName]='indicator.name'>
+            </app-health-indicator-icon>
+        </a>
+    </div>
+</div>
+
+<app-health-indicator-form #healthIndicatorForm
+                           [healthStateQuery]='healthStateQuery'
+                           (indicatorUpdated)='updateHealthIndicator.emit($event)'>
+</app-health-indicator-form>

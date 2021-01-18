@@ -1,0 +1,35 @@
+<div class='tile is-ancestor'>
+    <div class='tile is-parent is-3'>
+        <div class="tile is-child box">
+            <app-project-selection-list [projectSelections]='projects$ | async'
+                                        (stateChanged)='onProjectSelectionChanged($event)'>
+            </app-project-selection-list>
+        </div>
+    </div>
+    <div class='tile is-parent has-text-centered'
+         *ngFor='let selectedProject of selectedProjects$|async'>
+        <ng-container *ngIf='(snapshotQuery.currentSnapshotByProject$(selectedProject.id)|async) as snapshot'>
+            <ng-container *ngIf='(healthQuery.selectHealthStateBySnapshot(snapshot.id, selectedProject.id)|async) as healthStateString'>
+                <article class="tile is-child box notification is-light project-tile"
+                         [class.is-success]='healthStateString === "Good"'
+                         [class.is-warning]='healthStateString === "Warning"'
+                         [class.is-danger]='healthStateString === "Critical"'
+                         (resized)='onProjectTileResized($event)'>
+                    <a [href]='selectedProject.htmlUrl'
+                       target=_blank>
+                        <div class='is-size-4 is-lowercase'>{{selectedProject.name}}</div>
+                    </a>
+                    <a [href]='createCommitUrl(selectedProject.htmlUrl, snapshot.hash)'
+                       target='_blank'>
+                        <p class="is-size-7 is-lowercase has-text-weight-bold">{{snapshot.hash}} -
+                            {{snapshot.date|date}}</p>
+                    </a>
+                    <p class="is-size-7 snapshot-message">{{snapshot.message}}</p>
+                    <p *ngIf='(healthQuery.selectHealthBySnapshot(snapshot.id, selectedProject.id) | async) as healthState' class="is-size-7">
+                        {{getViolations(healthState)}}
+                    </p>
+                </article>
+            </ng-container>
+        </ng-container>
+    </div>
+</div>

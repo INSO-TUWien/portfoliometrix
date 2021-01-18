@@ -1,0 +1,9 @@
+Flask
+Flask-Cors
+Flask-Injector
+Flask-RESTful
+Jinja2
+pandas
+pyArango
+sklearn
+webargs

@@ -1,0 +1,6 @@
+.distribution-tile {
+    /* we must remove the padding, otherwise calculating the chart's dimension
+    would be more difficult. 
+    Without padding, the chart can simply be as large as parent tile */
+    padding: 0px;
+}

@@ -1,0 +1,23 @@
+<div class='tile is-ancestor'>
+    <div class='tile is-parent is-3'>
+        <article class="tile is-child box">
+            <app-metric-selection [metricSelections]='row.metrics' (stateChanged)='onMetricSelectionChanged($event)'>
+            </app-metric-selection>
+        </article>
+    </div>
+    <div class='tile is-parent is-vertical'>
+        <div class='visualization-control-tile'>
+            <div class='columns is-centered visualization-control-columns'>
+                <app-trend-visualization-control [controls]='row.controls' (controlChanged)='onControlsChanged($event)'>
+                </app-trend-visualization-control>
+            </div>            
+        </div>
+        <div class='tile is-parent chart-parent'>
+            <div *ngFor='let cell of cells$| async' class="tile is-child chart-tile">
+                <app-trend-visualization-series [series]='cell.series' [range]='row.range'
+                    [referenceLines]='cell.referenceLines'>
+                </app-trend-visualization-series>
+            </div>
+        </div>        
+    </div>
+</div>

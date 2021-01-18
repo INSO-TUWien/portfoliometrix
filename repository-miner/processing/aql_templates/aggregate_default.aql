@@ -1,0 +1,36 @@
+/*
+Creates the average of a metric for all snapshot of a given repository
+and stores them as edge documents in the Summary collection.
+This is the default behaviour for all metrics except SLOC (which are just summed up).
+When calling this script, the caller has to provide the key of the repository
+and the metric key
+*/
+
+FOR element IN (
+    FOR entry in (
+        FOR r IN Repository FILTER r._key == '{{repository_key}}'
+        FOR s,edge IN 1..1 INBOUND r SnapshotOfRepository
+        FOR e,m IN 1..1 INBOUND s MetricValue
+        FILTER m.metric == '{{metric_key}}'
+        RETURN {
+            commit: s._key,
+            metric: m.metric,
+            metric_value: m.value
+        }
+    )
+COLLECT commit = entry.commit, metric = entry.metric INTO by_commit
+RETURN {
+    commit: commit,
+    metric: metric,
+    average: AVG(by_commit[*].entry.metric_value),
+    median: MEDIAN(by_commit[*].entry.metric_value),
+    min: MIN(by_commit[*].entry.metric_value),
+    max: MAX(by_commit[*].entry.metric_value)
+}) INSERT {
+    _from: CONCAT('Snapshot/', element.commit),
+    _to: CONCAT('Metric/', element.metric),
+    average_value: element.average,
+    median_value: element.median,
+    min_value: element.min,
+    max_value: element.max
+} INTO SnapshotSummary

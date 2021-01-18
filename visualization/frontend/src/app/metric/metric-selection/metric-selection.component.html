@@ -1,0 +1,11 @@
+<div *ngFor='let metric of metricSelections'
+     class='metric-item-border'
+     [style.border-left-color]='colorMap[metric.id]'>
+  <label class="checkbox is-size-7"
+         [style.font-weight]="metric.isSelected ? 'bold' : 'normal'">
+    <input type="checkbox" #checkbox
+           [checked]='metric.isSelected'
+           (change)="stateChanged.emit({id: metric.id, isSelected: !metric.isSelected})">
+    {{metric.name}}
+  </label>
+</div>

@@ -1,0 +1,21 @@
+<div class='tile is-ancestor'>
+    <div class='tile is-parent is-3'>
+        <article class="tile is-child box">
+            <div class='center-buttons'>
+                <button *ngFor='let sorting of ["name","rate (asc)", "rate (desc)"]'
+                    class='button is-small is-info is-outlined is-lowercase'
+                    (click)='changeSortOrder.emit(sorting)'
+                    [class.is-light]="sorting === (currentSortOrder$|async)">{{sorting}}
+            </button>
+            </div>            
+        </article>
+    </div>
+    <div class='tile is-parent'>
+        <article *ngFor='let p of projects$|async'
+                 class="tile is-child project-tile"
+                 (resized)='onProjectTileResized($event)'>
+            <app-project-list-item class='column'
+                                   [project]='p'></app-project-list-item>
+        </article>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+.portfolio-selection-root {
+    
+}
+
+.portfolio-selection-label {
+    position: relative;
+    float: right;
+    text-align:right;
+    margin-right:20px;
+    margin-top: 9px;
+    margin-bottom: 9px;
+}
+
+.portfolio-selection {
+    float: right; 
+    position: relative;
+}

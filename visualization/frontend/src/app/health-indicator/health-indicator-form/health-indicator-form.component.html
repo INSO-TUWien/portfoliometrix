@@ -1,0 +1,183 @@
+<div class="modal"
+     [class.is-active]='isVisible'>
+    <div class="modal-background hide-back"></div>
+    <div class="modal-card dialog">
+        <header class="modal-card-head">
+            <div class='modal-card-title'>
+                <div class='left'>Health Indicator</div>
+                <app-health-indicator-icon [healthState$]='overallHealthState$'
+                                           [indicatorName]='indicatorName.value'>
+                </app-health-indicator-icon>
+            </div>
+            <button class="delete"
+                    (click)='closeDialog()'
+                    aria-label="close"></button>
+        </header>
+        <section class="modal-card-body">
+            <!-- form -->
+            <form [formGroup]="healthIndicatorForm">
+                <div class="field is-horizontal">
+                    <div class="field-label is-small">
+                        <label class="label">Name</label>
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <p class="control is-expanded">
+                                <input #indicatorName
+                                       class="input is-small"
+                                       type="text"
+                                       placeholder="enter indicator name"
+                                       formControlName='name'>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="field is-horizontal">
+                    <div class="field-label is-small">
+                        <label class="label">Rules</label>
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <div class="control has-text-right">
+                                <button class="button is-info is-small"
+                                        (click)='newRule()'>
+                                    Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div *ngFor="let rule of metricRules.controls;index as i">
+                    <ng-container [formGroup]="rule">
+                        <hr>
+                        <!-- metric -->
+                        <div class='field is-horizontal'>
+                            <div class='field-label is-small'>
+                                <label class='label'>Metric</label>
+                            </div>
+                            <div class='field-body'>
+                                <!-- this field is necessary for horizontal stretching -->
+                                <div class='field'>
+                                    <div class='control'>
+                                        <div class='select is-small is-fullwidth'>
+                                            <select formControlName='metric'>
+                                                <option *ngFor='let metric of metrics$ | async'
+                                                        [value]='metric.id'>{{metric.name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- threshold -->
+                        <div class='field is-horizontal'>
+                            <div class='field-label is-small'>
+                                <label class='label'>Lower Threshold</label>
+                            </div>
+                            <div class='field-body'>
+                                <!-- this field is necessary for horizontal stretching -->
+                                <div class='field'>
+                                    <p class="control is-expanded">
+                                        <input class="input is-small"
+                                               formControlName='lowerThreshold'
+                                               type="number"
+                                               placeholder="enter lower threshold">
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- threshold -->
+                        <div class='field is-horizontal'>
+                            <div class='field-label is-small'>
+                                <label class='label'>Upper Threshold</label>
+                            </div>
+                            <div class='field-body'>
+                                <!-- this field is necessary for horizontal stretching -->
+                                <div class='field'>
+                                    <p class="control is-expanded">
+                                        <input class="input is-small"
+                                               formControlName='upperThreshold'
+                                               type="number"
+                                               placeholder="enter upper threshold">
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- aggregate -->
+                        <div class='field is-horizontal'>
+                            <div class='field-label is-small'>
+                                <label class='label'>Aggregate</label>
+                            </div>
+                            <div class='field-body'>
+                                <!-- this field is necessary for horizontal stretching -->
+                                <div class='field'>
+                                    <div class='control'>
+                                        <div class='select is-small is-fullwidth'>
+                                            <select formControlName='aggregate'>
+                                                <option>median</option>
+                                                <option>average</option>
+                                                <option value='min'>minimum</option>
+                                                <option value='max'>maximum</option>
+                                                <option>sum</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- affection -->
+                        <div class='field is-horizontal'>
+                            <div class='field-label is-small'>
+                                <label class='label'>Affects health</label>
+                            </div>
+                            <div class='field-body'>
+                                <!-- this field is necessary for horizontal stretching -->
+                                <div class='field'>
+                                    <label class="checkbox">
+                                        <input type="checkbox"
+                                               formControlName='affectsHealth'>
+                                    </label>
+                                </div>
+                                <div class="field">
+                                    <div class="control has-text-right">
+                                        <button class="button is-danger is-small is-light button-margin"
+                                                (click)='removeRule(i)'>
+                                            Remove
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- status -->
+                        <div class='field is-horizontal'>
+                            <div class='field-label is-small'>
+                                <label class='label'>Status</label>
+                            </div>
+                            <div class='field-body'>
+                                <span class='is-small tag'
+                                      [ngClass]='rule.get("state").value'>
+                                    {{rule.get('stateMessage').value}}
+                                </span>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </form>
+        </section>
+        <footer class="modal-card-foot"
+                [ngClass]='isProjectIndicator ? "stretched" : "right-align"'>
+            <div *ngIf='isProjectIndicator'>
+                <button class="button is-danger is-small"
+                        (click)='delete()'>Delete</button>
+            </div>
+            <div>
+                <button class="button is-info is-small"
+                        (click)='apply()'>Apply</button>
+                <button class="button is-success is-small button-margin"
+                        (click)='ok()'>Save</button>
+                <button class="button is-small"
+                        (click)='closeDialog()'>Cancel</button>
+            </div>
+        </footer>
+    </div>
+</div>
