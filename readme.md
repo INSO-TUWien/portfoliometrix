@@ -2,7 +2,7 @@
 
 
 
-*portfolio|metrix* is a prototype application for gathering, visualizing and analyzing software quality metrics on portfolio level. 
+*portfoliotrix* is a prototype application for gathering, visualizing and analyzing software quality metrics on portfolio level. 
 
 The application consists of three different parts:
 
